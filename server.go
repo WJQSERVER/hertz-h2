@@ -1317,7 +1317,7 @@ func (sc *serverConn) closeStream(st *stream, err error, dirty bool) {
 	}
 
 	if len(sc.streams) == 0 {
-		if sc.srv.IdleTimeout != 0 {
+		if sc.srv.IdleTimeout != 0 && sc.idleTimer != nil {
 			sc.idleTimer.Reset(sc.srv.IdleTimeout)
 		}
 		if h1ServerKeepAlivesDisabled(sc.engine) {
